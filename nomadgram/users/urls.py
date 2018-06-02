@@ -4,12 +4,13 @@ from . import views
 
 app_name = "users"
 urlpatterns = [
-    path("", view=views.UserListView.as_view(), name="list"),
-    path("~redirect/", view=views.UserRedirectView.as_view(), name="redirect"),
-    path("~update/", view=views.UserUpdateView.as_view(), name="update"),
-    path(
-        "<str:username>",
-        view=views.UserDetailView.as_view(),
-        name="detail",
-    ),
+    path("explore/", view=views.ExploreUsers.as_view(), name="explore_users"),
+    path("<int:user_id>/follow/", view=views.FollowUser.as_view(), name="following_users"),
+    path("<int:user_id>/unfollow/", view=views.UnFollowUser.as_view(), name="following_users"),
+    path("<str:username>/followers/", view=views.UserFollowers.as_view(), name="user_followers"),
+    path("<str:username>/following/", view=views.UserFollowing.as_view(), name="user_following"),
+    path("search/", view=views.Search.as_view(), name='search'),
+    path("<str:username>/", view=views.UserProfile.as_view(), name="user_profile"),
+    path("<str:username>/password/", view=views.ChangePassword.as_view(), name="change_password"),
+    path('login/facebook/', view=views.FacebookLogin.as_view(), name='fb_login'),
 ]
